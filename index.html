@@ -1,0 +1,136 @@
+<style>
+  @import url(https://fonts.googleapis.com/css?family=Quicksand:300,400,700);.app .nav .search input,body{font-family:quicksand;color:#fff}body{background:#1b1c20}.app{position:absolute;width:100%;height:100%;text-align:center}.app .nav{margin:20px}.app .nav .search button{background:0 0;border:0}.app .nav .search input{font-weight:300;font-size:20px;padding:10px 10px 10px 20px;border-radius:40px;border:1px solid rgba(255,255,255,.5);background:0 0;box-shadow:inset 0 0 27px -4px rgba(0,0,0,.75);width:803px;height:30px;-webkit-transition:all .2s;transition:all .2s;margin:20px}.app .nav .search input:focus{outline:0;background:rgba(255,255,255,.05);border:1px solid #fff}.app .video-player{display:flex-column;text-align:center;width:100%;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);padding-top:20px;padding-bottom:20px;box-shadow:4px 4px 19px 0 rgba(0,0,0,.75)}.app .video-player .playing{margin:20px auto;width:843px;height:480px;border-radius:2px;box-shadow:5px 5px 6px -4px rgba(0,0,0,.75)}.app .video-player .playing-title{display:inline-block;font-size:20px;font-weight:700;margin-top:10px}.app .video-player .playing-description{margin:20px auto auto;width:843px;border-top:1px solid rgba(255,255,255,.05);padding-top:10px}.app .video-player i{cursor:pointer;font-size:40px;position:absolute;top:360px;padding:20px;border:2px solid rgba(255,255,255,.1);border-radius:2px;background-color:rgba(255,255,255,.05);box-shadow:5px 5px 6px -4px rgba(0,0,0,.75);-webkit-transition:box-shadow .2s;transition:box-shadow .2s}.app .video-player i:hover{box-shadow:none}.app .video-player .fa-arrow-left{left:200px}.app .video-player .fa-arrow-right{right:200px}.app .videos{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;overflow-x:auto;overflow-y:hidden;margin-bottom:40px;margin-top:40px}.app .videos .video{cursor:pointer;font-size:20px;margin-right:10px;margin-left:10px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#fff;height:300px;border-radius:2px;box-shadow:5px 5px 6px -4px rgba(0,0,0,.75);-webkit-transition:-webkit-transform .2s ease;transition:-webkit-transform .2s ease;transition:transform .2s ease;transition:transform .2s ease,-webkit-transform .2s ease}.app .videos .video:hover{-webkit-transform:scale(.97);transform:scale(.97)}.app .videos .video .thumbnail-wrapper{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;padding:5px;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;margin-bottom:10px}.app .videos .video .video-thumb{width:300px;box-shadow:5px 5px 6px -4px rgba(0,0,0,.75)}.app .videos .video .video-title{padding:5px;font-weight:700;font-size:16px;overflow:auto;height:100px}.app .videos .video .video-description{font-size:14px;display:flex-column;max-height:100px;overflow:auto}
+</style>
+<LINK href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<script src="https://fb.me/react-15.0.1.js"></script> 
+<script src="https://fb.me/react-dom-15.0.1.js"></script>
+<script src="https://npmcdn.com/react-dom@15.3.0/dist/react-dom.min.js"></script>
+<script src="https://npmcdn.com/react@15.3.0/dist/react.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.12.0/lodash.min.js"></script>
+<title> Smirkmusic Downloader</title>
+
+<h6>
+  
+    </h6>
+<!--  
+                                                                                                                                                                              
+                                                                                                                                                                                                        
+                   @@          @@      `@.    @@     .@@       #@@@#    @;     :@              @@@@@'         @@@@@      +@+     ,@  @@@@@@@@@@      :@@@@@     @@@@@@@`  :@@@@@@'  `@.    @@           
+                  ,@@         ,@@      ,@`   ,@@     @@@      :@@@@@`   @,     +@             .@@@@@@@       @@@@@@@     @@@     '@  @@@@@@@@@@      @@@@@@@    @@@@@@@   @@@@@@@:  ,@`   ,@@           
+                  #@@         @@@      '@    @@      @@@      @@+ @@`  .@`     #@             ;@@@@@@@:     +@@@@@@@;    @@@     #@  @@@@@@@@@+      @@@@@@@`   @@@@@@@   @@@@@@@   '@    @@            
+                  @@@`        @@@`     +@   ,@#     `@#@     .@#   '   ;@      @@             +@    @@@     @@:   #@@    @@@     @@      @;          @@   #@+   @+        @@        #@   :@#            
+                  @.@,        @.@,     @@   @@      '@;@     #@        #@      @@             @@     @@    +@#     @@    @:@:    @@     `@.          @@    @@   @:        @@        @@   @@             
+                 +@ @;       +@ @;     @@  :@+      @@,@     @@        @@      @@             @@     +@,   @@      @@    @.@#    @#     ,@`          @+    @@  .@.        @+        @@  ;@+             
+                 @@ @+       @@ @+     @@  @@       @'`@`    @@        @@      @+             @@     `@+  `@@      '@`  `@ @@    @'     '@           @:    @@  :@         @;        @@  @@              
+                 @; @@       @; @@     @# ;@'      :@  @,    @@        @@      @;             @@      @#  +@.      :@,  :@ @@    @,     +@          `@.    @@  +@        `@.        @# '@;              
+                :@  @@      ;@  @@     @+ @@       @@  @;    @@        @#     `@.             @+      @@  @@       ,@,  '@ +@    @`     @@          ,@     @#  #@        .@         @' @@               
+                @@  @@      @@  @@     @:'@:       @#  @+    #@+       @+     .@`             @:      @@  @@       ,@,  #@ ,@`  .@      @@          ;@    .@:  @@        ;@         @,+@,               
+                @#  @@      @#  @@    `@.@@       `@.  @#    .@@`      @:     ;@             `@.      @#  @@       :@`  @@  @'  ;@      @@          #@    @@   @@        #@        `@`@@                
+               `@.  #@     .@`  #@    :@+@.       #@   @@     @@@     `@@@@@@@@@             :@       @# `@+       ;@`  @@  @@  +@      @@          @@    @@   @@@@@@:   @@@@@@@   :@+@`                
+               #@   '@     #@   +@    +@#@        @@   @@     `@@@    :@@@@@@@@@             '@       @+ ,@,       +@   @#  @@  @@      @'          @@   @@;   @@@@@@.   @@@@@@+   +@#@                 
+               @@   ;@     @@   '@    #@.@;       @'   @@      :@@+   '@@@@@@@@@             #@      `@; '@`       @@   @'  @@  @@      @:          @@@@@@@    @;        @@        @@,@;                
+               @;   ,@`    @;   ,@    @@ @@      ;@    @@       +@@   #@      @@             @@      ;@. +@        @@   @,  ;@` @@     .@`          @@@@@@     @,        @@        @@ @@                
+              '@    `@.   '@    `@`   @@ @@      @@    #@        @@   @@      @@             @@      #@  #@        @@  `@`  `@, @+     :@           @@@@+     .@`        @+        @@ @@                
+              @@@@@@@@,   @@@@@@@@,   @@ ;@.     @@@@@@@@        '@,  @@      @+             @@      @@  #@       `@#  .@    @# @;     +@           @:        :@         @:        @@ '@.               
+              @@@@@@@@'   @@@@@@@@;   @#  @#    .@@@@@@@@        .@,  @@      @:             @#      @@  #@       ;@.  ;@    @@ @.     #@          .@.        +@        .@.        @+ `@#               
+             ,@@@@@@@@+  ,@@@@@@@@+   @;  @@    #@@@@@@@@`       .@,  @#     `@`             @'     ;@;  #@`      @@   +@    @@`@      @@          :@         @@        :@         @;  @@               
+             @@      @@  @@      @@   @.  #@`   @@     `@,       ;@`  @'     ,@              @,     @@   '@,      @@   #@    +@.@      @@          +@         @@        '@        `@.  @@`              
+             @@      @@  @@      @@  .@`  .@+  `@+      @;       @@  `@,     '@             .@`    :@@   ,@#     @@;   @@    .@'@      @@          #@         @@        #@        ,@`  .@'              
+             @'      @@ `@'      @@  ;@    @@  +@       @+ @,   `@@  .@`     #@    @;       ;@    `@@`    @@    .@@    @@     @@@      @#          @@         @@        @@        ;@    @@              
+            +@`      @@ +@       @@  +@    @@  @@       @# @@@ :@@;  ;@      @@   .@'       +@   @@@@     @@@` @@@'    @#     @@@      @;          @@         @+        @@        #@    @@              
+            @@       @@ @@       @@  @@    '@: @#       @@ @@@@@@@   +@      @@   ;@,       @@@@@@@@      :@@@@@@@     @;     @@@     `@.          @@         @@@@@@@   @@@@@@@   @@    +@:             
+            @@       #@ @@       #@  @@     @@,@,       @@  @@@@@    #@      @@   +@        @@@@@@@        @@@@@@      @.     +@#     ,@`          @#        `@@@@@@@   @@@@@@@   @@     @#             
+                                                             '@'                  @@                         @@                                                                                         
+                                                                                  @'                                                                                                                    
+                                                                                 +@                                                                                                                     
+                                                                                 @+                                                                                                                     
+                                                                                `@                                                                                                                      
+                                                                                ##           
+                                                                                I KNOW ITS SEXY BUT KEEP YOUR EYES OFF                                                                                                           
+-->
+<div id="app"></div>
+
+
+
+<script>
+function _classCallCheck(b, a) {
+  if (!(b instanceof a)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+function _possibleConstructorReturn(b, a) {
+  if (!b) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+  return !a || "object" !== typeof a && "function" !== typeof a ? b : a;
+}
+function _inherits(b, a) {
+  if ("function" !== typeof a && null !== a) {
+    throw new TypeError("Super expression must either be null or a function, not " + typeof a);
+  }
+  b.prototype = Object.create(a && a.prototype, {constructor:{value:b, enumerable:!1, writable:!0, configurable:!0}});
+  a && (Object.setPrototypeOf ? Object.setPrototypeOf(b, a) : b.__proto__ = a);
+}
+var _React = React, Component = _React.Component, _ReactDOM = ReactDOM, render = _ReactDOM.render, searchYouTube = function(b, a) {
+  fetch("https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=" + b.max + "&order=relevance&q=" + b.query + "&key=" + b.key).then(function(a) {
+    return a.json();
+  }).then(function(b) {
+    return a(b.items);
+  });
+}, App = function(b) {
+  function a() {
+    _classCallCheck(this, a);
+    var c = _possibleConstructorReturn(this, b.call(this));
+    c.state = {videos:null, playing:null};
+    return c;
+  }
+  _inherits(a, b);
+  a.prototype.componentDidMount = function() {
+    this.getVideos("Phylo what will you do");
+  };
+  a.prototype.getVideos = function(a) {
+    searchYouTube({query:a, max:20, key:"AIzaSyCcWlWyGp0wiAWldkCxCkhMVMrymb1dCqY"}, function(a) {
+      console.log(a);
+      this.setState({videos:a, playing:a[0]});
+    }.bind(this));
+  };
+  a.prototype.setPlaying = function(a) {
+    this.setState({playing:a});
+  };
+  a.prototype.nextVideo = function() {
+    var a = this.state.videos.slice(), b = a.indexOf(this.state.playing), e = a[b + 1];
+    b + 1 < a.length && this.setState({playing:e});
+  };
+  a.prototype.previousVideo = function() {
+    var a = this.state.videos.slice(), b = a.indexOf(this.state.playing), a = a[b - 1];
+    0 <= b - 1 && this.setState({playing:a});
+  };
+  a.prototype.render = function() {
+    var a = _.debounce(this.getVideos.bind(this), 400);
+    return this.state.videos ? React.createElement("div", {className:"app"}, React.createElement(Nav, {getVideos:a}), React.createElement("div", null, React.createElement(VideoPlayer, {video:this.state.playing, nextVideo:this.nextVideo.bind(this), previousVideo:this.previousVideo.bind(this)})), React.createElement("div", null, React.createElement(VideoList, {setPlaying:this.setPlaying.bind(this), videos:this.state.videos}))) : React.createElement("div", null, " Youtube MP3 Downloader and Player -this will be gone in seconds   ");
+  };
+  return a;
+}(Component), Nav = function(b) {
+  return React.createElement("nav", {className:"nav"}, React.createElement("div", {className:"search"}, React.createElement(Search, {getVideos:b.getVideos})));
+}, Search = function(b) {
+  var a = b.getVideos;
+  return React.createElement("div", null, React.createElement("input", {onKeyUp:function(b) {
+    a(b.target.value);
+  }, type:"text", placeholder:"Mp3 from YouTube ;D just search..."}));
+}, VideoPlayer = function(b) {
+  var a = b.video, c = b.nextVideo;
+  return React.createElement("div", {className:"video-player"}, React.createElement("i", {className:"fa fa-arrow-left", "aria-hidden":"true", onClick:b.previousVideo}), React.createElement("i", {className:"fa fa-arrow-right", "aria-hidden":"true", onClick:c}), React.createElement("div", null, React.createElement("iframe", {className:"playing", src:"https://www.youtube.com/embed/" + a.id.videoId, allowFullScreen:!0})), React.createElement("div", null, React.createElement("iframe", {style:{width:230, 
+  height:60, border:0, margin:0}, scrolling:"no", src:"https://www.youtubeinmp3.com/widget/button/?video=https://www.youtube.com/watch?v=" + a.id.videoId, allowFullScreen:!1})));
+}, VideoList = function(b) {
+  var a = b.setPlaying;
+  return React.createElement("div", {className:"videos-wrapper"}, React.createElement("div", {className:"videos"}, b.videos.map(function(b, d) {
+    return React.createElement(Video, {setPlaying:a, video:b, key:d});
+  })));
+}, Video = function(b) {
+  var a = b.setPlaying, c = b.video;
+  return React.createElement("div", {className:"video", onClick:function() {
+    return a(c);
+  }}, " ", React.createElement("div", {className:"thumbnail-wrapper"}, React.createElement("img", {className:"video-thumb", src:c.snippet.thumbnails.high.url, alt:""})), React.createElement("div", null, React.createElement("div", {className:"video-title"}, c.snippet.title)));
+};
+render(React.createElement(App, null), document.getElementById("app"));
+</script>
